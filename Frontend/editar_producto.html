@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Producto</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Editar Producto</h1>
+        <a href="index.html" class="boton">Volver al menú principal</a>
+        <form id="form-editar-producto">
+            <div class="form-row">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="descripcion" placeholder="Descripción">
+                <input type="text" name="marca" placeholder="Marca">
+            </div>
+            <div class="form-row">
+                <input type="text" name="presentacion" placeholder="Presentación">
+                <input type="text" name="principio_activo" placeholder="Principio activo">
+                <input type="text" name="concentracion" placeholder="Concentración">
+            </div>
+            <div class="form-row">
+                <input type="text" name="codigo_barras" placeholder="Codigo de barras">
+                <input type="text" name="lote" placeholder="Lote">
+                <input type="text" name="laboratorio" placeholder="Laboratorio">
+            </div>
+            <div class="form-row">
+                <input type="text" name="precio_compra" placeholder="Precio de compra" required>
+                <input type="text" name="precio_venta" placeholder="Precio de venta" required>
+                <input type="text" name="id_categoria" placeholder="ID Categoria" required>
+            </div>
+            <div class="form-row">
+                <label>
+                    <input type="checkbox" name="requiere_receta">Requiere receta
+                </label>
+                <label>
+                    Fecha de vencimiento:
+                    <input type="date" name="fecha_vencimiento">
+                </label>
+            </div>
+            <button type="submit" class="boton">Guardar Cambios</button>
+            <div id="mensaje-form" class="mensaje"></div>
+             
+        </form>
+    </div>
+    <script src="js/editar_producto.js"></script>
+</body>
+</html>

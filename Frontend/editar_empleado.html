@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar empleado</title>
+    <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+    <div class="form-container">
+        <h1>Editar Empleado</h1>
+        <a href="index.html" class="boton">Volver al menú principal</a>
+        <form id="form-editar-empleado">
+             <div class="form-row">
+                <input type="text" name="nombre" placeholder="Nombre">
+                <input type="text" name="apellido" placeholder="Apellido">
+                <input type="text" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-row">
+                <input type="text" name="telefono" placeholder="Telefono">
+                <input type="text" name="direccion" placeholder="Direccion">
+                <input type="text" name="cargo" placeholder="Cargo">
+            </div>
+            <div class="form-row">
+                <input type="text" name="cedula" placeholder="Cedula" required>
+                <input type="text" name="salario" placeholder="Salario">
+                <input type="text" name="id_sucursal" placeholder="ID sucursal">
+            </div> 
+            <div class="form-row">
+                </label>
+                <label>
+                    Fecha de ingreso:
+                    <input type="date" name="fecha_ingreso">
+                </label>
+            </div>
+            <button type="submit" class="boton">Guardar Cambios</button>
+            <div id="mensaje-form" class="mensaje"></div>
+             
+        </form>
+    </div>
+    <script src="js/editar_empleado.js"></script>
+</body>
+</html>
