@@ -1,29 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8"/>
-     <title>Lista de productos</title>
-    <link rel="stylesheet" href="styles.css"/>
- </head>
- <body>
-    <h1>productos</h1>
-    <a href="index.html" class="boton">Volver al menu principal</a>
-    <div class="table-container">
-        <table id="tabla-productos">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Precio Venta</th>
-                    <th>Categoria</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>  
-     <tbody>   
-                <!--Aqui se llenaran de productos -->
-                </tbody>  
-            </table>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos — Farmacia</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span class="brand-icon">💊</span> Farmacia
+        </a>
+        <button class="navbar-toggle"
+            onclick="document.querySelector('.navbar-links').classList.toggle('open')">☰</button>
+        <ul class="navbar-links">
+            <li><a href="index.html">🏠 Inicio</a></li>
+            <li><a href="productos.html" class="active">📦 Productos</a></li>
+            <li><a href="empleado.html">👥 Empleados</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <a href="agregar_productos.html" class="btn btn-primary btn-sm">+ Nuevo Producto</a>
         </div>
-        <script src="js/productos.js"></script>
- </body>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-container">
+        <div class="page-header">
+            <div>
+                <h1>Productos</h1>
+                <p class="breadcrumb"><a href="index.html">Inicio</a> / Productos</p>
+            </div>
+            <a href="agregar_productos.html" class="btn btn-primary">+ Agregar Producto</a>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-header">
+                <h2>📦 Lista de Productos</h2>
+                <div class="table-search">
+                    <input type="text" id="buscar-producto" placeholder="Buscar producto...">
+                </div>
+            </div>
+            <div id="loading-productos" class="loading-state">
+                <div class="spinner"></div>
+                <p>Cargando productos...</p>
+            </div>
+            <div id="empty-productos" class="empty-state" style="display:none;">
+                <div class="empty-icon">📦</div>
+                <h3>No hay productos registrados</h3>
+                <p>Agrega tu primer producto para comenzar</p>
+                <a href="agregar_productos.html" class="btn btn-primary">+ Agregar Producto</a>
+            </div>
+            <div class="table-scroll" id="tabla-container" style="display:none;">
+                <table id="tabla-productos">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio Venta</th>
+                            <th>Categoría</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!--Aqui se llenaran de productos -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="modal-confirm" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-icon">⚠️</span>
+                <h3>Confirmar Eliminación</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">¿Estás seguro de que deseas eliminar este producto?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button class="btn btn-danger" id="modal-confirm-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/productos.js"></script>
+</body>
+
 </html>

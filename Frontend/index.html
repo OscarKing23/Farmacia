@@ -2,17 +2,118 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8"/>
-    <title>Farmacia - menu Principal</title>
-    <link rel="stylesheet"href="styles.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Farmacia — Panel Principal</title>
+    <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
-    <h1>Bienvenido al sistema de farmacia</h1>
-    <div class="menu-principal">
-        <a href="productos.html" class="boton">ver productos</a>
-        <a href="empleado.html" class="boton">Ver Empleados</a>
-        <a href="agregar_productos.html" class="boton">Agregar Producto</a>
-        <a href="agregar_empleado.html" class="boton">Agregar Empleado</a>
-        <!--Puedes agregar mas opciones en el futuro-->   
-</div>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span class="brand-icon">💊</span> Farmacia
+        </a>
+        <button class="navbar-toggle" onclick="document.querySelector('.navbar-links').classList.toggle('open')">☰</button>
+        <ul class="navbar-links">
+            <li><a href="index.html" class="active">🏠 Inicio</a></li>
+            <li><a href="productos.html">📦 Productos</a></li>
+            <li><a href="empleado.html">👥 Empleados</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <a href="agregar_productos.html" class="btn btn-primary btn-sm">+ Nuevo</a>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-container">
+        <div class="page-header">
+            <div>
+                <h1>Panel Principal</h1>
+                <p class="breadcrumb">Bienvenido al sistema de gestión de farmacia</p>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="dashboard-grid">
+            <a href="productos.html" class="stat-card">
+                <div class="stat-icon blue">📦</div>
+                <div class="stat-content">
+                    <h3>Productos</h3>
+                    <div class="stat-value" id="total-productos">—</div>
+                    <div class="stat-label">registrados en el sistema</div>
+                </div>
+            </a>
+            <a href="empleado.html" class="stat-card">
+                <div class="stat-icon green">👥</div>
+                <div class="stat-content">
+                    <h3>Empleados</h3>
+                    <div class="stat-value" id="total-empleados">—</div>
+                    <div class="stat-label">activos actualmente</div>
+                </div>
+            </a>
+            <div class="stat-card">
+                <div class="stat-icon amber">⚡</div>
+                <div class="stat-content">
+                    <h3>Estado</h3>
+                    <div class="stat-value" id="estado-servidor" style="font-size:1.1rem;">Verificando...</div>
+                    <div class="stat-label">conexión al servidor</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="margin-bottom: 12px;">
+            <h2 style="font-size: 1.05rem; font-weight: 600; color: var(--text-primary); margin-bottom: 14px;">Acceso Rápido</h2>
+        </div>
+        <div class="quick-actions">
+            <a href="agregar_productos.html" class="quick-action-card">
+                <span class="action-icon">➕</span> Agregar Producto
+            </a>
+            <a href="agregar_empleado.html" class="quick-action-card">
+                <span class="action-icon">🧑‍💼</span> Agregar Empleado
+            </a>
+            <a href="productos.html" class="quick-action-card">
+                <span class="action-icon">📋</span> Ver Productos
+            </a>
+            <a href="empleado.html" class="quick-action-card">
+                <span class="action-icon">📇</span> Ver Empleados
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Fetch product count
+        fetch('http://localhost:3000/productos')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('total-productos').textContent = Array.isArray(data) ? data.length : '0';
+            })
+            .catch(() => {
+                document.getElementById('total-productos').textContent = '—';
+            });
+
+        // Fetch employee count
+        fetch('http://localhost:3000/empleados')
+            .then(r => r.json())
+            .then(data => {
+                document.getElementById('total-empleados').textContent = Array.isArray(data) ? data.length : '0';
+            })
+            .catch(() => {
+                document.getElementById('total-empleados').textContent = '—';
+            });
+
+        // Check server status
+        fetch('http://localhost:3000/')
+            .then(r => r.json())
+            .then(data => {
+                const el = document.getElementById('estado-servidor');
+                el.textContent = '✅ Conectado';
+                el.style.color = 'var(--success)';
+            })
+            .catch(() => {
+                const el = document.getElementById('estado-servidor');
+                el.textContent = '❌ Sin conexión';
+                el.style.color = 'var(--danger)';
+            });
+    </script>
 </body>
 </html>

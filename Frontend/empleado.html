@@ -1,31 +1,100 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8"/>
-     <title>Lista de empleados</title>
-    <link rel="stylesheet" href="styles.css"/>
- </head>
- <body>
-    <h1>empleados</h1>
-    <a href="index.html" class="boton">Volver al menu principal</a>
-    <div class="table-container">
-        <table id="tabla-empleados">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Cedula</th>
-                    <th>Cargo</th>
-                    <th>email</th>
-                    <th>sucursal</th>
-                </tr>
-            </thead>  
-     <tbody>   
-                
-                </tbody>  
-            </table>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados — Farmacia</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="navbar-brand">
+            <span class="brand-icon">💊</span> Farmacia
+        </a>
+        <button class="navbar-toggle"
+            onclick="document.querySelector('.navbar-links').classList.toggle('open')">☰</button>
+        <ul class="navbar-links">
+            <li><a href="index.html">🏠 Inicio</a></li>
+            <li><a href="productos.html">📦 Productos</a></li>
+            <li><a href="empleado.html" class="active">👥 Empleados</a></li>
+        </ul>
+        <div class="navbar-actions">
+            <a href="agregar_empleado.html" class="btn btn-primary btn-sm">+ Nuevo Empleado</a>
         </div>
-        <script src="js/empleados.js"></script>
- </body>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="page-container">
+        <div class="page-header">
+            <div>
+                <h1>Empleados</h1>
+                <p class="breadcrumb"><a href="index.html">Inicio</a> / Empleados</p>
+            </div>
+            <a href="agregar_empleado.html" class="btn btn-primary">+ Agregar Empleado</a>
+        </div>
+
+        <div class="table-wrapper">
+            <div class="table-header">
+                <h2>👥 Lista de Empleados</h2>
+                <div class="table-search">
+                    <input type="text" id="buscar-empleado" placeholder="Buscar empleado...">
+                </div>
+            </div>
+            <div id="loading-empleados" class="loading-state">
+                <div class="spinner"></div>
+                <p>Cargando empleados...</p>
+            </div>
+            <div id="empty-empleados" class="empty-state" style="display:none;">
+                <div class="empty-icon">👥</div>
+                <h3>No hay empleados registrados</h3>
+                <p>Agrega tu primer empleado para comenzar</p>
+                <a href="agregar_empleado.html" class="btn btn-primary">+ Agregar Empleado</a>
+            </div>
+            <div class="table-scroll" id="tabla-container" style="display:none;">
+                <table id="tabla-empleados">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Cédula</th>
+                            <th>Cargo</th>
+                            <th>Email</th>
+                            <th>Sucursal</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toast-container"></div>
+
+    <!-- Confirm Modal -->
+    <div class="modal-overlay" id="modal-confirm" style="display:none;">
+        <div class="modal">
+            <div class="modal-header">
+                <span class="modal-icon">⚠️</span>
+                <h3>Confirmar Eliminación</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modal-message">¿Estás seguro de que deseas eliminar este empleado?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button class="btn btn-danger" id="modal-confirm-btn">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/empleados.js"></script>
+</body>
+
 </html>
